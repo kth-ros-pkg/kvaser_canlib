@@ -1,0 +1,20 @@
+<package>
+  <description brief="kvaser_canlib">
+
+     kvaser_canlib
+
+  </description>
+  <author>Francisco Vina</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/kvaser_canlib</url>
+  
+
+
+  <export>
+    <cpp cflags="-I${prefix}/include -I${prefix}/include/kvaser_canlib" lflags="-Wl,-rpath,${prefix}/lib -L${prefix}/lib -lcanlib"/>
+  </export>
+
+</package>
+
+
