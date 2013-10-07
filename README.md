@@ -1,4 +1,4 @@
 kvaser_canlib
 =============
 
-Drivers and header files for Kvaser CAN cards
+Installs drivers and header files for Kvaser CAN cards.
