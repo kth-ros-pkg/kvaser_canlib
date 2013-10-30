@@ -4,13 +4,21 @@
   <description>
     Installs drivers and header files for Kvaser CAN cards.
   </description>
-  <maintainer email="fevb@kth.se">Francisco Vina</maintainer>
   <license>BSD</license>
-
   <url>http://ros.org/wiki/kvaser_canlib</url>
-  <author>Francisco Vina</author>
+
+  <maintainer email="fevb@kth.se">Francisco Vina</maintainer>
+  <author email="fevb@kth.se">Francisco Vina</author>
+
+
+
+  
 
   <buildtool_depend>catkin</buildtool_depend>
- 
+  
+  <export>
+    <cpp lflags="-Wl,-rpath,-lcanlib"/>
+  </export>
+
   
 </package>
