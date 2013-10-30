@@ -3,7 +3,6 @@ kvaser_canlib
 
 Installs drivers and header files for Kvaser CAN cards.
 
-Install by unzipping the linuxcan.tar.gz file and executing the install script:
+Install by running the driver installation script in the ./script folder:
 
-tar -xzf linuxcan.tar.gz
-sudo ./install_script.sh
+sudo ./scripts/install_kvaser_drivers.sh

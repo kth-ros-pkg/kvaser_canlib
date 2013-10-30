@@ -17,7 +17,7 @@
   <buildtool_depend>catkin</buildtool_depend>
   
   <export>
-    <cpp lflags="-Wl,-rpath,-lcanlib"/>
+    <cpp lflags="-lcanlib"/>
   </export>
 
   
