@@ -15,10 +15,6 @@
   
 
   <buildtool_depend>catkin</buildtool_depend>
-  
-  <export>
-    <cpp lflags="-lcanlib"/>
-  </export>
 
   
 </package>

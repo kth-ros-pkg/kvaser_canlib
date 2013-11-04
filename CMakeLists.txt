@@ -39,6 +39,24 @@ find_package(catkin REQUIRED COMPONENTS)
 #   std_msgs  # Or other packages containing msgs
 # )
 
+add_custom_target(
+  build_kvaser_canlib ALL
+  COMMAND cmake -E chdir ${PROJECT_SOURCE_DIR} make -f Makefile.tarball)
+
+add_custom_target(
+    copy_kvaser_canlib ALL
+    COMMAND cmake -E copy ${PROJECT_SOURCE_DIR}/lib/libcanlib.so  ${CATKIN_DEVEL_PREFIX}/${CATKIN_GLOBAL_LIB_DESTINATION})
+
+add_custom_target(
+    copy_kvaser_canlib1 ALL
+    COMMAND cmake -E copy ${PROJECT_SOURCE_DIR}/lib/libcanlib.so.1  ${CATKIN_DEVEL_PREFIX}/${CATKIN_GLOBAL_LIB_DESTINATION})
+
+
+add_custom_target(
+    copy_kvaser_canlib110 ALL
+    COMMAND cmake -E copy ${PROJECT_SOURCE_DIR}/lib/libcanlib.so.1.1.0  ${CATKIN_DEVEL_PREFIX}/${CATKIN_GLOBAL_LIB_DESTINATION})
+
+
 ###################################
 ## catkin specific configuration ##
 ###################################
@@ -49,9 +67,9 @@ find_package(catkin REQUIRED COMPONENTS)
 ## CATKIN_DEPENDS: catkin_packages dependent projects also need
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
-#  INCLUDE_DIRS include
-#  LIBRARIES test
-#  CATKIN_DEPENDS dumbo_description
+ INCLUDE_DIRS include
+ LIBRARIES canlib
+#  CATKIN_DEPENDS 
 #  DEPENDS system_lib
 )
 
@@ -62,6 +80,10 @@ catkin_package(
 ## Specify additional locations of header files
 ## Your package locations should be listed before other locations
 # include_directories(include)
+link_directories(
+ ${catkin_LIBRARY_DIRS}
+)
+
 include_directories(
   ${catkin_INCLUDE_DIRS}
 )
@@ -70,6 +92,17 @@ include_directories(
 # add_library(test
 #   src/${PROJECT_NAME}/test.cpp
 # )
+
+# TODO: clean this up...
+add_library(kvaser_canlib SHARED)
+set_target_properties(kvaser_canlib PROPERTIES LINKER_LANGUAGE CXX)
+
+add_dependencies(kvaser_canlib copy_kvaser_canlib)
+add_dependencies(kvaser_canlib copy_kvaser_canlib1)
+add_dependencies(kvaser_canlib copy_kvaser_canlib110)
+add_dependencies(copy_kvaser_canlib build_kvaser_canlib)
+add_dependencies(copy_kvaser_canlib1 build_kvaser_canlib)
+add_dependencies(copy_kvaser_canlib110 build_kvaser_canlib)
 
 ## Declare a cpp executable
 # add_executable(test_node src/test_node.cpp)
@@ -92,14 +125,14 @@ include_directories(
 
 ## Mark executable scripts (Python etc.) for installation
 ## in contrast to setup.py, you can choose the destination
-install(PROGRAMS
-  scripts/start_CAN_cards.sh
-  scripts/stop_CAN_cards.sh
-  DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
-)
+# install(PROGRAMS
+#   scripts/start_CAN_cards.sh
+#   scripts/stop_CAN_cards.sh
+#   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+# )
 
 ## Mark executables and/or libraries for installation
-# install(TARGETS test test_node
+# install(TARGETS canlib
 #   ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
 #   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
 #   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
