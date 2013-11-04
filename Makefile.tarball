@@ -21,7 +21,7 @@ installed: $(SOURCE_DIR)/unpacked
 	cp $(SOURCE_DIR)/canlib/$(LIBRARY) lib/$(LIBNAME)
 	cp $(SOURCE_DIR)/canlib/$(LIBRARY) lib/$(SONAME)
 
-	cp $(SOURCE_DIR)/include/*.h include/kvaser_canlib
+	cp $(SOURCE_DIR)/include/canlib.h $(SOURCE_DIR)/include/canstat.h include/kvaser_canlib
 clean:
 	rm -rf include lib $(SOURCE_DIR) $(TARBALL)
 wipe: clean

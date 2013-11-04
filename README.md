@@ -1,8 +1,9 @@
 kvaser_canlib
 =============
 
-Installs drivers and header files for Kvaser CAN cards.
+Installs drivers and header files for Kvaser CAN cards. Requires sudo rights for installation of libraries and header files.
 
-Install by running the driver installation script in the ./script folder:
+Remember to add the canlib library for linking in dependent packages, e.g.:
 
-sudo ./scripts/install_kvaser_drivers.sh
+add_executable(test.cpp src/test.cpp)
+target_link_libraries(myexec canlib ${catkin_LIBRARIES})
