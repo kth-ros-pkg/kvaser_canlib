@@ -26,5 +26,4 @@ srv_gen
 CMakeLists.txt.user
 *~
 linuxcan
-include
 CATKIN_IGNORE
