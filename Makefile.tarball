@@ -1,7 +1,7 @@
 all: installed
 
 TARBALL = build/linuxcan.tar.gz
-TARBALL_URL = http://www.csc.kth.se/~fevb/linuxcan.tar.gz
+TARBALL_URL = http://www.csc.kth.se/~fevb/downloads/linuxcan.tar.gz
 SOURCE_DIR = build/linuxcan
 MD5SUM_FILE = linuxcan.tar.gz.md5sum
 KERNEL_VER=/usr/src/linux-headers-"`uname -r`"
