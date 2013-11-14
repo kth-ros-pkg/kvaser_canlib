@@ -1,4 +1,5 @@
 cmake_minimum_required(VERSION 2.8.3)
+project(kvaser_canlib)
 
 include(ExternalProject)
 ExternalProject_Add(canlib_
@@ -14,8 +15,6 @@ ExternalProject_Add(canlib_
 
 project(kvaser_canlib)
 
-find_package(catkin REQUIRED)
-
 catkin_package(
   INCLUDE_DIRS include
   LIBRARIES
@@ -26,9 +25,3 @@ install(DIRECTORY include/${PROJECT_NAME}/
    FILES_MATCHING PATTERN "*.h"
 )
 
-# install(FILES
-#    ${CATKIN_DEVEL_PREFIX}/lib/libcanlib.so
-#    ${CATKIN_DEVEL_PREFIX}/lib/libcanlib.so.1
-#    ${CATKIN_DEVEL_PREFIX}/lib/libcanlib.so.1.1.0
-#    DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
-# )
