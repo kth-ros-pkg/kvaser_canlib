@@ -25,8 +25,9 @@ Clone the git repository in the workspace:
     cd ~/canlib_ws/src
     git clone -b groovy https://github.com/kth-ros-pkg/kvaser_canlib.git
 
-Compile:
+Source the setup.bash file and compile:
  
+    source ~/canlib_ws/devel/setup.bash
     cd ~/canlib_ws
     catkin_make    
 
