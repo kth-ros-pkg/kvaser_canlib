@@ -1,80 +1,34 @@
 cmake_minimum_required(VERSION 2.8.3)
+
+include(ExternalProject)
+ExternalProject_Add(canlib_
+  PREFIX ${CMAKE_CURRENT_BINARY_DIR}
+  DOWNLOAD_DIR ${CMAKE_CURRENT_BINARY_DIR}/download
+  URL http://www.csc.kth.se/~fevb/downloads/linuxcan.tar.gz
+  URL_MD5 c4051f7935cac72441a4f8107a3cbe1a
+  CONFIGURE_COMMAND "" #  no configuration file, we just want to make
+  BINARY_DIR ${CMAKE_CURRENT_BINARY_DIR}/src/canlib_/
+  BUILD_COMMAND make
+  INSTALL_COMMAND sudo make install
+)
+
 project(kvaser_canlib)
 
-find_package(catkin REQUIRED COMPONENTS)
-
-
-link_directories(
- ${catkin_LIBRARY_DIRS}
-)
-
-include_directories(
-  ${catkin_INCLUDE_DIRS}
-)
+find_package(catkin REQUIRED)
 
 catkin_package(
- INCLUDE_DIRS include
- # LIBRARIES canlib
-#  CATKIN_DEPENDS 
-#  DEPENDS system_lib
+  INCLUDE_DIRS include
+  LIBRARIES 
 )
 
-# TODO: very dirty.. have to clean this up
+install(DIRECTORY include/${PROJECT_NAME}/
+   DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
+   FILES_MATCHING PATTERN "*.h"
+)
 
-# add_custom_target(
-#   build_kvaser_canlib ALL
-#   COMMAND cmake -E chdir ${PROJECT_SOURCE_DIR} make -f Makefile.tarball && mkdir -p ${CATKIN_DEVEL_PREFIX}/${CATKIN_GLOBAL_LIB_DESTINATION}/${PROJECT_NAME})
-
-# add_custom_target(
-#     copy_kvaser_canlib ALL
-#     COMMAND cmake -E copy ${PROJECT_SOURCE_DIR}/lib/libcanlib.so  ${CATKIN_DEVEL_PREFIX}/${CATKIN_GLOBAL_LIB_DESTINATION}/${PROJECT_NAME})
-
-# add_custom_target(
-#     copy_kvaser_canlib1 ALL
-#     COMMAND cmake -E copy ${PROJECT_SOURCE_DIR}/lib/libcanlib.so.1  ${CATKIN_DEVEL_PREFIX}/${CATKIN_GLOBAL_LIB_DESTINATION}/${PROJECT_NAME})
-
-# add_custom_target(
-#     copy_kvaser_canlib110 ALL
-#     COMMAND cmake -E copy ${PROJECT_SOURCE_DIR}/lib/libcanlib.so.1.1.0  ${CATKIN_DEVEL_PREFIX}/${CATKIN_GLOBAL_LIB_DESTINATION}/${PROJECT_NAME})
-
-# ##########################
-
-add_custom_target(
-  build_kvaser_canlib ALL
-  COMMAND cmake -E chdir ${PROJECT_SOURCE_DIR} make -f Makefile.tarball)
-
-# add_custom_target(
-#     copy_kvaser_canlib ALL
-#     COMMAND cmake -E copy ${PROJECT_SOURCE_DIR}/lib/libcanlib.so  ${CATKIN_DEVEL_PREFIX}/${CATKIN_GLOBAL_LIB_DESTINATION}/)
-
-# add_custom_target(
-#     copy_kvaser_canlib1 ALL
-#     COMMAND cmake -E copy ${PROJECT_SOURCE_DIR}/lib/libcanlib.so.1  ${CATKIN_DEVEL_PREFIX}/${CATKIN_GLOBAL_LIB_DESTINATION}/)
-
-# add_custom_target(
-#     copy_kvaser_canlib110 ALL
-#     COMMAND cmake -E copy ${PROJECT_SOURCE_DIR}/lib/libcanlib.so.1.1.0  ${CATKIN_DEVEL_PREFIX}/${CATKIN_GLOBAL_LIB_DESTINATION}/)
-
-# for removing the fake libcanlib.so
-# add_custom_target(
-#     rm_canlib ALL
-#     COMMAND rm ${CATKIN_DEVEL_PREFIX}/${CATKIN_GLOBAL_LIB_DESTINATION}/libcanlib.so)
-
-# add_custom_target(
-#     rm_canlib ALL
-#     COMMAND cp ${CATKIN_DEVEL_PREFIX}/${CATKIN_GLOBAL_LIB_DESTINATION}/${PROJECT_NAME}/libcanlib.so ${CATKIN_DEVEL_PREFIX}/${CATKIN_GLOBAL_LIB_DESTINATION}/libcanlib.so)
-
-# TODO: clean this up... very nasty
-# add_library(canlib SHARED)
-# set_target_properties(canlib PROPERTIES LINKER_LANGUAGE CXX)
-
-
-# # add_dependencies(rm_canlib canlib)
-
-# add_dependencies(canlib copy_kvaser_canlib)
-# add_dependencies(canlib copy_kvaser_canlib1)
-# add_dependencies(canlib copy_kvaser_canlib110)
-# add_dependencies(copy_kvaser_canlib build_kvaser_canlib)
-# add_dependencies(copy_kvaser_canlib1 build_kvaser_canlib)
-# add_dependencies(copy_kvaser_canlib110 build_kvaser_canlib)
-
+install(FILES
+   ${CATKIN_DEVEL_PREFIX}/lib/libcanlib.so
+   ${CATKIN_DEVEL_PREFIX}/lib/libcanlib.so.1
+   ${CATKIN_DEVEL_PREFIX}/lib/libcanlib.so.1.1.0
+   DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+)

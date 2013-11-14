@@ -16,14 +16,9 @@
 .project
 .pydevproject
 cmake_install.cmake
-linuxcan
-install_script.sh
 bin
 build
 lib
-msg_gen
-srv_gen
 CMakeLists.txt.user
 *~
-kvaser_canlib
 CATKIN_IGNORE
