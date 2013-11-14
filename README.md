@@ -21,7 +21,7 @@ Create an empty catkin workspace:
 Clone the git repository there:
     
     cd ~/canlib_ws/src
-    git clone https://github.com/kth-ros-pkg/kvaser_canlib.git -v groovy
+    git clone -b groovy https://github.com/kth-ros-pkg/kvaser_canlib.git
 
 Compile:
  
