@@ -13,11 +13,31 @@ ExternalProject_Add(canlib_
   INSTALL_COMMAND sudo make install 
 )
 
-project(kvaser_canlib)
+add_custom_target(
+  copy_canlib ALL
+  COMMAND cmake -E copy ${CMAKE_CURRENT_BINARY_DIR}/src/canlib_/canlib/libcanlib.so ${CATKIN_DEVEL_PREFIX}/${CATKIN_GLOBAL_LIB_DESTINATION}/libcanlib.so)
+
+add_custom_target(
+  copy_canlib1 ALL
+  COMMAND cmake -E copy ${CMAKE_CURRENT_BINARY_DIR}/src/canlib_/canlib/libcanlib.so.1 ${CATKIN_DEVEL_PREFIX}/${CATKIN_GLOBAL_LIB_DESTINATION}/libcanlib.so.1)
+
+add_custom_target(
+  copy_canlib110 ALL
+  COMMAND cmake -E copy ${CMAKE_CURRENT_BINARY_DIR}/src/canlib_/canlib/libcanlib.so.1.1.0 ${CATKIN_DEVEL_PREFIX}/${CATKIN_GLOBAL_LIB_DESTINATION}/libcanlib.so.1.1.0)
+
+add_library(canlib SHARED)
+set_target_properties(canlib PROPERTIES LINKER_LANGUAGE CXX)
+
+add_dependencies(canlib copy_canlib)
+add_dependencies(canlib copy_canlib1)
+add_dependencies(canlib copy_canlib110)
+add_dependencies(copy_canlib canlib_)
+add_dependencies(copy_canlib1 canlib_)
+add_dependencies(copy_canlib110 canlib_)
 
 catkin_package(
   INCLUDE_DIRS include
-  LIBRARIES
+  LIBRARIES canlib
 )
 
 install(DIRECTORY include/${PROJECT_NAME}/
