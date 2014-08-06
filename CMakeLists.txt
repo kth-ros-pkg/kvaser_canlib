@@ -5,7 +5,7 @@ include(ExternalProject)
 ExternalProject_Add(canlib_
   PREFIX ${CMAKE_CURRENT_BINARY_DIR}
   DOWNLOAD_DIR ${CMAKE_CURRENT_BINARY_DIR}/download
-  URL http://www.csc.kth.se/~fevb/downloads/linuxcan_2014.tar.gz
+  URL http://www.kvaser.com/software/7330130980754/V5_3_0/linuxcan.tar.gz
   URL_MD5 7d6d97266fd370d4233cbc1e0a917e82
   CONFIGURE_COMMAND "" # there is no configuration file
   BINARY_DIR ${CMAKE_CURRENT_BINARY_DIR}/src/canlib_
